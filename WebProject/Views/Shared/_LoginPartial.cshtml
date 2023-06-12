@@ -1,0 +1,27 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<ul class="navbar-nav-check" style="display: flex; flex-direction: row; align-items :center; background-color:#f07c29 ;">
+@if (SignInManager.IsSignedIn(User))
+{
+        <li class="nav-item" style="padding:20px; color: white;">
+            <a id="manage" style="color: white; text-transform: uppercase; font-weight: bold;" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+    </li>
+        <li class="nav-item">
+        <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button id="logout" type="submit" style="background-color: white;" class="px-2 py-1 nav-link btn btn-link text-dark">Logout</button>
+        </form>
+    </li>
+}
+else
+{
+        <li class="nav-item" style="padding:20px; color: white;">
+        <a class="nav-link text-dark" style="color: white; text-transform: uppercase; font-weight: bold;" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
+    </li>
+        <li class="nav-item" style="padding:20px; color: white;">
+            <a class="nav-link text-dark" style="color: white; text-transform: uppercase;font-weight: bold;" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+    </li>
+}
+</ul>
